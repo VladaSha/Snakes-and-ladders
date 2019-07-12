@@ -35,19 +35,8 @@ div.tile {
     position: relative;
 }
 
-.btn {
-    padding-top: 400px;
-}
-
-#start-button {
-    background-color: red;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+.dice-container {
+    padding-top: 300px;
 }
 
 .ladders {
@@ -57,23 +46,22 @@ div.tile {
 }
 
 .snakes {
-    position: relative;
-    z-index: 1;
-    top: 10px;
-    right: 85px;
+    position: absolute;
+    top: 40px;
+    right: 35px;
 }
 
-#p1 {
+#Rabbit {
     position: absolute;
     z-index: 1;
     bottom: 1px;
     left: 15px;
 }
 
-#p2 {
+#Moose {
     position: absolute;
     z-index: 1;
-    right: 30px;
+    right: 25px;
     bottom: 3px;
 }
 
@@ -98,4 +86,55 @@ div.tile {
     0%   {left: 200px; top: 520px;}
     50%  {left: 150px; top: 520px;}
     100% {left: 200px; top: 520px;}
+}
+
+#dice {
+    width: 100px;
+    height: 100px;
+    animation: rotation 3s infinite linear;
+    display: block;
+    margin: auto;
+}
+
+#current-moves {
+    padding-top: 10px;
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Schoolbell';
+    font-weight: bold;
+}
+
+/* @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  } */
+
+
+#finish {
+    position: absolute;
+    z-index: 1;
+    left: -10px;
+    bottom: 3px;
+}
+
+#score-left{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Schoolbell';
+    font-weight: bold;
+}
+
+#score-right{
+    padding-top: 75px;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Schoolbell';
+    font-weight: bold;
 }

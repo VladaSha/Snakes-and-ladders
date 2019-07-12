@@ -10,6 +10,7 @@ class Player {
         this.position = 1
         this.id = id
         this.board = board;
+        this.score = 0;
     }
 
 }
@@ -28,9 +29,7 @@ class GameElement {
 Player.prototype.moveOnBoard = function (numOfMoves,callback){
 
     var newPos = this.position + numOfMoves
-    // var stepsForward = this.board.length - this.position
-    var stepsBack = newPos - this.board.length
-    var finalPos = this.board.length - stepsBack
+    var lastTile = this.board.length
     
     if(newPos<=this.board.length){
         debugger
@@ -45,24 +44,17 @@ Player.prototype.moveOnBoard = function (numOfMoves,callback){
                     that.position = gameElement.endPosition
                     callback(that)
                 }
-            } else {
+                if(newPos === lastTile){
+                    that.position = 1
+                    that.score++
+                    callback(that)
+                }
+            } else if (that.position < newPos) {
                 that.position++
                 callback(that)
             }
         }, 500); 
     } 
-    else { // newPos>length
-
-        var that = this
-        var id = setInterval(function(){
-            debugger
-            if (that.position <= that.board.length) {
-                that.position++
-                callback(that)
-            } 
-        }, 500); 
-    }
-
 }
 
 class Game {
@@ -77,7 +69,7 @@ class Game {
     }
 
     randDice(){
-        return  Math.ceil(Math.random()*6)
+        return Math.ceil(Math.random()*6)
     }
 
     currentTurn = 0;

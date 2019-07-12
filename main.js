@@ -1,7 +1,8 @@
 let board = new Board([new GameElement("ladder1","ladder",10,16), new GameElement("ladder2","ladder",27,33),
-    new GameElement("snake1","snake",35,22), new GameElement("snake1","snake",15,2)],36);
-var player1 = new Player("p1",board)
-var player2 = new Player("p2",board)
+new GameElement("ladder3","ladder",18,24), new GameElement("snake1","snake",35,22), 
+new GameElement("snake2","snake",15,2), new GameElement("snake3","snake",26,13),],36);
+var player1 = new Player("Rabbit",board)
+var player2 = new Player("Moose",board)
 
 let game = new Game(board, [player1,player2])
 
@@ -16,34 +17,46 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var elem = document.createElement("img");
     elem.setAttribute("id",player1.id) 
     elem.src = "krosh.png";
-    elem.setAttribute("class", "krosh");
     elem.setAttribute("height", "75");
     elem.setAttribute("width", "65");
-    elem.setAttribute("alt", "Krosh");
+    elem.setAttribute("alt", "Rabbit");
     document.getElementById("1").appendChild(elem);
 
     var elem2 = document.createElement("img")
     elem2.setAttribute("id",player2.id)
     elem2.src = "Losyash.png"
-    elem2.setAttribute("class", "losyash");
     elem2.setAttribute("height", "55");
     elem2.setAttribute("width", "55");
-    elem2.setAttribute("alt", "Losyash");
+    elem2.setAttribute("alt", "Moose");
     document.getElementById("1").appendChild(elem2);
 
-    createElements(board,document)
-    document.getElementById("start-button").onclick = function() {
-       let numOfMoves = game.randDice()
-       document.getElementById("current-moves").innerHTML = numOfMoves
-       // show number of moves in UI
+    var finish = document.createElement("img")
+    finish.setAttribute("id","finish")
+    finish.src = "finish.png"
+    finish.setAttribute("height", "85");
+    finish.setAttribute("width", "85");
+    document.getElementById("36").appendChild(finish);
 
-       game.takeTurn(numOfMoves, function(player){
+    createElements(board,document)
+
+    document.getElementById("score-left").innerHTML = `${player1.id} score: ${player1.score}`
+    document.getElementById("score-right").innerHTML = `${player2.id} score: ${player2.score}`
+
+    document.getElementById("dice").onclick = function() {
+       let numOfMoves = game.randDice()
+
+        game.takeTurn(numOfMoves, function(player){
+        document.getElementById("current-moves").innerHTML = `${player.id} move ${numOfMoves} tiles`
+
         let playerNode = document.getElementById(player.id)
         let dest_div = document.getElementById(player.position)
         dest_div.appendChild(playerNode)
+        document.getElementById("score-left").innerHTML = `${player1.id} score: ${player1.score}`
+        document.getElementById("score-right").innerHTML = `${player2.id} score: ${player2.score}`
        })
     }
 
+    
 });
 
 
